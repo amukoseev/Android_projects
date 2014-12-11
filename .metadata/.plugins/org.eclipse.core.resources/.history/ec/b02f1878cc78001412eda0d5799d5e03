@@ -1,0 +1,18 @@
+package co.qbrain.android.geoquiz;
+
+public class TrueFalse {
+	private int mQuestion;
+	private boolean mTrueQuestion;
+	public TrueFalse(int question, boolean trueQuestion) {
+	mQuestion = question;
+	mTrueQuestion = trueQuestion;
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

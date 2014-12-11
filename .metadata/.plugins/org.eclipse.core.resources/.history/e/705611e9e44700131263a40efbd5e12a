@@ -1,0 +1,96 @@
+package ru.nim579.ArtistAggregatorDemo;
+
+import java.io.IOException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.XmlResourceParser;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class AADActivity extends Activity {
+    /** Called when the activity is first created. */
+	public TextView art_name_field;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        art_name_field = (TextView)findViewById(R.id.textView1);
+        
+        XmlResourceParser xml = this.getResources().getXml(R.xml.artist);
+		String s_xml = null;
+		s_xml = XmlToString(xml);
+		art_name_field.setText(tagParser("name", s_xml)+"");
+		
+		ImageView proc_go = (ImageView)findViewById(R.id.b_info);
+		proc_go.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		goAct(info.class);
+        	}
+        });
+		
+		ImageView disco_go = (ImageView)findViewById(R.id.b_discography);
+		disco_go.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		goAct(discography.class);
+        	}
+        });
+		        
+    }
+    
+    //"Xml" to "String" function with handler
+    private String XmlToString_uh(XmlResourceParser code) throws XmlPullParserException, IOException{
+    	StringBuffer sx = new StringBuffer();
+    	code.next();
+    	int eventType = code.getEventType();
+    	while(eventType != XmlPullParser.END_DOCUMENT){
+    		if(eventType == XmlPullParser.START_TAG){sx.append("<"+code.getName()+">");}
+    		else if(eventType == XmlPullParser.END_TAG){sx.append("</"+code.getName()+">");}
+    		else if(eventType == XmlPullParser.TEXT){sx.append(code.getText());}
+    		eventType = code.next();
+    	}
+		return sx.toString();
+    }
+    
+    public String XmlToString(XmlResourceParser code){
+    	try {
+			return XmlToString_uh(code);
+		} catch (XmlPullParserException e) {
+			return null;
+		} catch (IOException e) {
+			return null;
+		}
+		
+    }
+    
+    public String tagParser(String tag_name, String doc){
+    	String cont = "";
+    	String pattern = "<"+tag_name+">(.+?)</"+tag_name+">";
+    	Pattern exp = Pattern.compile(pattern);
+    	Matcher m = exp.matcher(doc);
+    	if(m.find()){
+    		cont = m.group(1);
+    	}
+    	
+		return cont;
+    }
+    
+    public void goAct(Class<?> t){
+		Intent i = new Intent(this,t);
+		startActivity(i);
+	}
+    public void OpenTable() {
+    }
+    }
+}

@@ -1,0 +1,10 @@
+opentablebutton<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, AADActivity!</string>
+    <string name="app_name">Artist Aggregator Demo</string>
+    <string name="info_lable">История группы</string>
+    <string name="disco_lable">Дискография</string>
+    <string name="disc_lable">Диск</string>
+    <string name="no_cont">No content</string>
+    <string name="opentablebutton">Отдай!</string>
+</resources>

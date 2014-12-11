@@ -1,0 +1,36 @@
+
+import javax.swing.*;
+
+public class HelloWorldClass {
+	public static void main (String[] args) {
+		System.out.println("Hello World");
+		Ant MyAnt = new Ant();
+		MyAnt.setPos(1,10);
+		MyAnt.moveUp(2);
+		
+		JFrame frame = new JFrame("Hello World");
+		JPanel panel = new JPanel();
+		ImageIcon icon = new ImageIcon("images/setka.png","Сетка");  //createImageIcon("images/ant.png","Муравей");
+		panel.add(new JLabel ("", icon, JLabel.CENTER));
+		
+		ImageIcon icon2 = new ImageIcon("images/ant.png","Муравей");  //createImageIcon("images/ant.png","Муравей");
+		panel.add(new JLabel ("", icon2, JLabel.CENTER));
+		
+		frame.getContentPane().add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	protected ImageIcon createImageIcon(String path,
+            String description) {
+			java.net.URL imgURL = getClass().getResource(path);
+				if (imgURL != null) {
+						return new ImageIcon(imgURL, description);
+					} 
+				else {
+							System.err.println("Couldn't find file: " + path);
+								return null;
+					}
+	}
+
+}
+

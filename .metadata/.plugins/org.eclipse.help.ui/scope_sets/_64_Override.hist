@@ -1,0 +1,4 @@
+#Fri Nov 08 11:05:54 MSK 2013
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+expression=@Override
